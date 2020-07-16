@@ -21,42 +21,60 @@ class SearchViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+
+    @IBAction func segmentChanged(_ sender: UISegmentedControl) {
+        print("segmentChangedsegmentChanged")
+        performSearch()
+    }
+
 
     var searchResults = [SearchResult]()
     var hasSearched = false
     var isLoading = false
+    var dataTask: URLSessionDataTask?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
 
-        tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        tableView.contentInset = UIEdgeInsets(top: 108, left: 0, bottom: 0, right: 0)
         tableView.register(UINib(nibName: TableView.CellIdentifiers.searchResultCell, bundle: nil), forCellReuseIdentifier: TableView.CellIdentifiers.searchResultCell)
         tableView.register(UINib(nibName: TableView.CellIdentifiers.nothingFoundCell, bundle: nil), forCellReuseIdentifier: TableView.CellIdentifiers.nothingFoundCell)
         tableView.register(UINib(nibName: TableView.CellIdentifiers.loadingCell, bundle: nil), forCellReuseIdentifier: TableView.CellIdentifiers.loadingCell)
         searchBar.becomeFirstResponder()
+
+        // Style segment control
+        let segmentColor = UIColor(red: 10 / 255, green: 80 / 255, blue: 80 / 255, alpha: 1)
+        let selectedTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        let normalTextAttributes = [NSAttributedString.Key.foregroundColor: segmentColor]
+        segmentedControl.selectedSegmentTintColor = segmentColor
+        segmentedControl.setTitleTextAttributes(normalTextAttributes, for: .normal)
+        segmentedControl.setTitleTextAttributes(selectedTextAttributes, for: .selected)
+        segmentedControl.setTitleTextAttributes(selectedTextAttributes, for: .highlighted)
+
     }
 
     // MARK:- Helper Methods
-    func iTunesURL(searchText: String) -> URL {
+    func iTunesURL(searchText: String, category: Int) -> URL {
+        let kind: String
+        switch category {
+        case 1: kind = "musicTrack"
+        case 2: kind = "software"
+        case 3: kind = "ebook"
+        default: kind = ""
+        }
+
         let encodedText = searchText.addingPercentEncoding(
             withAllowedCharacters: CharacterSet.urlQueryAllowed)!
 
-        let urlString = String(format:
-            "https://itunes.apple.com/search?term=%@", encodedText)
+        let urlString = "https://itunes.apple.com/search?" +
+            "term=\(encodedText)&limit=200&entity=\(kind)"
+
         let url = URL(string: urlString)
         return url!
     }
 
-    func performStoreRequest(with url: URL) -> Data? {
-        do {
-            return try Data(contentsOf: url)
-        } catch {
-            print("Download Error: \(error.localizedDescription)")
-            showNetworkError()
-            return nil
-        }
-    }
 
     func parse(data: Data) -> [SearchResult] {
         do {
@@ -85,23 +103,16 @@ class SearchViewController: UIViewController {
 }
 
 extension SearchViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-//        searchResults = []
-//        for i in 0...2 {
-//            let searchResult = SearchResult()
-//            searchResult.name = String(format:
-//                "Fake Result %d for", i)
-//            searchResult.artistName = searchBar.text!
-//            searchResults.append(searchResult)
-//        }
-//
-//        searchBar.resignFirstResponder()
-//
-//        hasSearched = true
-//        tableView.reloadData()
 
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        performSearch()
+    }
+
+    func performSearch() {
         if !searchBar.text!.isEmpty {
             searchBar.resignFirstResponder()
+
+            dataTask?.cancel()
 
             isLoading = true
             tableView.reloadData()
@@ -109,25 +120,42 @@ extension SearchViewController: UISearchBarDelegate {
             hasSearched = true
             searchResults = []
 
-            // Make async request
-            let queue = DispatchQueue.global()
-
-
-            queue.async {
-                let url = self.iTunesURL(searchText: searchBar.text!)
-                print("URL: '\(url)'")
-
-                if let data = self.performStoreRequest(with: url) {
-                    self.searchResults = self.parse(data: data)
-                    self.searchResults.sort(by: <)
-
-                    DispatchQueue.main.async {
-                        self.isLoading = false
-                        self.tableView.reloadData()
-                    }
+            // 1
+            let url = iTunesURL(searchText: searchBar.text!, category: segmentedControl.selectedSegmentIndex)
+            // 2
+            let session = URLSession.shared
+            // 3
+            dataTask = session.dataTask(with: url, completionHandler: { data, response, error in
+                // 4
+                if let error = error as NSError?, error.code == -999 {
+                    print("Failure! \(error.localizedDescription)")
                     return
+                } else if let httpResponse = response as? HTTPURLResponse,
+                    httpResponse.statusCode == 200 {
+                    if let data = data {
+                        self.searchResults = self.parse(data: data)
+                        self.searchResults.sort(by: <)
+                        DispatchQueue.main.async {
+                            self.isLoading = false
+                            self.tableView.reloadData()
+                        }
+                        return
+                    }
+
+                } else {
+                    print("Failure! \(response!)")
                 }
-            }
+
+                DispatchQueue.main.async {
+                    self.hasSearched = false
+                    self.isLoading = false
+                    self.tableView.reloadData()
+                    self.showNetworkError()
+                }
+
+            })
+            // 5
+            dataTask?.resume()
 
         }
 
@@ -174,13 +202,7 @@ extension SearchViewController: UITableViewDelegate,
                 withIdentifier: TableView.CellIdentifiers.searchResultCell, for: indexPath) as! SearchResultCell
 
             let searchResult = searchResults[indexPath.row]
-            cell.nameLabel.text = searchResult.name
-            if searchResult.artist.isEmpty {
-                cell.artistNameLabel.text = "Unknown"
-            } else {
-                cell.artistNameLabel.text = String(format: "%@ (%@)",
-                                                   searchResult.artist, searchResult.type)
-            }
+            cell.configure(for: searchResult)
 
             return cell
         }

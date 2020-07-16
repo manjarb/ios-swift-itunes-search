@@ -20,6 +20,7 @@
 		743CC6F124BB208C001ED5E1 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CC6F024BB208C001ED5E1 /* SearchResultCell.swift */; };
 		7468CD7B24BF56DD00765091 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7468CD7924BF56DD00765091 /* LoadingCell.swift */; };
 		7468CD7C24BF56DD00765091 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7468CD7A24BF56DD00765091 /* LoadingCell.xib */; };
+		74C0A59524C0978400737E14 /* UIImageView+DownloadImag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0A59424C0978400737E14 /* UIImageView+DownloadImag.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		743CC6F024BB208C001ED5E1 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		7468CD7924BF56DD00765091 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		7468CD7A24BF56DD00765091 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
+		74C0A59424C0978400737E14 /* UIImageView+DownloadImag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImag.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,6 +72,7 @@
 		743CC6D524BAFFAD001ED5E1 /* StoreSearch */ = {
 			isa = PBXGroup;
 			children = (
+				74C0A59324C0977400737E14 /* extensions */,
 				743CC6EF24BB1D09001ED5E1 /* components */,
 				743CC6EA24BB1933001ED5E1 /* models */,
 				743CC6D624BAFFAD001ED5E1 /* AppDelegate.swift */,
@@ -102,6 +105,14 @@
 				7468CD7A24BF56DD00765091 /* LoadingCell.xib */,
 			);
 			path = components;
+			sourceTree = "<group>";
+		};
+		74C0A59324C0977400737E14 /* extensions */ = {
+			isa = PBXGroup;
+			children = (
+				74C0A59424C0978400737E14 /* UIImageView+DownloadImag.swift */,
+			);
+			path = extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,6 +195,7 @@
 				743CC6EC24BB1954001ED5E1 /* SearchResult.swift in Sources */,
 				7468CD7B24BF56DD00765091 /* LoadingCell.swift in Sources */,
 				743CC6D924BAFFAD001ED5E1 /* SceneDelegate.swift in Sources */,
+				74C0A59524C0978400737E14 /* UIImageView+DownloadImag.swift in Sources */,
 				743CC6F124BB208C001ED5E1 /* SearchResultCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

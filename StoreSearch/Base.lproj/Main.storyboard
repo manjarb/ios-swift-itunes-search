@@ -78,5 +78,44 @@
             </objects>
             <point key="canvasLocation" x="132" y="139"/>
         </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="mRg-hg-2D6">
+            <objects>
+                <viewController id="81S-kv-g1F" customClass="DetailViewController" customModule="StoreSearch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" alpha="0.5" contentMode="scaleToFill" id="fuC-aB-d3x">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.94999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G2L-fr-bve" userLabel="Pop-up View">
+                                <rect key="frame" x="87" y="328" width="240" height="240"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QHf-XG-epz">
+                                        <rect key="frame" x="5" y="2" width="15" height="22"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="CloseButton"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="R1C-jk-sqd"/>
+                                    <constraint firstAttribute="height" constant="240" id="fbT-ag-ykN"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <constraints>
+                            <constraint firstItem="G2L-fr-bve" firstAttribute="centerY" secondItem="fuC-aB-d3x" secondAttribute="centerY" id="3i1-0h-6oO"/>
+                            <constraint firstItem="G2L-fr-bve" firstAttribute="centerX" secondItem="fuC-aB-d3x" secondAttribute="centerX" id="4aO-e8-2q4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="eN8-Xa-0OT"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kls-2x-ZZP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="827" y="136"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="CloseButton" width="15" height="15"/>
+    </resources>
 </document>

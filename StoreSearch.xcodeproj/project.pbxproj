@@ -20,6 +20,7 @@
 		743CC6F124BB208C001ED5E1 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 743CC6F024BB208C001ED5E1 /* SearchResultCell.swift */; };
 		7468CD7B24BF56DD00765091 /* LoadingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7468CD7924BF56DD00765091 /* LoadingCell.swift */; };
 		7468CD7C24BF56DD00765091 /* LoadingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7468CD7A24BF56DD00765091 /* LoadingCell.xib */; };
+		746AA21624CCA0D1007800D7 /* DimmingPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 746AA21524CCA0D1007800D7 /* DimmingPresentationController.swift */; };
 		74C0A59524C0978400737E14 /* UIImageView+DownloadImag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0A59424C0978400737E14 /* UIImageView+DownloadImag.swift */; };
 		74C0A59724C099A500737E14 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74C0A59624C099A500737E14 /* DetailViewController.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		743CC6F024BB208C001ED5E1 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		7468CD7924BF56DD00765091 /* LoadingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCell.swift; sourceTree = "<group>"; };
 		7468CD7A24BF56DD00765091 /* LoadingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingCell.xib; sourceTree = "<group>"; };
+		746AA21524CCA0D1007800D7 /* DimmingPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DimmingPresentationController.swift; sourceTree = "<group>"; };
 		74C0A59424C0978400737E14 /* UIImageView+DownloadImag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+DownloadImag.swift"; sourceTree = "<group>"; };
 		74C0A59624C099A500737E14 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 				743CC6E124BAFFAF001ED5E1 /* LaunchScreen.storyboard */,
 				743CC6E424BAFFAF001ED5E1 /* Info.plist */,
 				74C0A59624C099A500737E14 /* DetailViewController.swift */,
+				746AA21524CCA0D1007800D7 /* DimmingPresentationController.swift */,
 			);
 			path = StoreSearch;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74C0A59724C099A500737E14 /* DetailViewController.swift in Sources */,
+				746AA21624CCA0D1007800D7 /* DimmingPresentationController.swift in Sources */,
 				743CC6DB24BAFFAD001ED5E1 /* SearchViewController.swift in Sources */,
 				743CC6D724BAFFAD001ED5E1 /* AppDelegate.swift in Sources */,
 				7429582224BDD9EE00976520 /* NothingFoundCell.swift in Sources */,
